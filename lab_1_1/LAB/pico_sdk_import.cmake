@@ -1,0 +1,1 @@
+include(${CMAKE_CURRENT_LIST_DIR}/../lcd_sd_card_example/pico_sdk_import.cmake)

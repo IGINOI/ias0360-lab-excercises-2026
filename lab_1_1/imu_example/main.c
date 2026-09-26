@@ -5,7 +5,7 @@
 #include "pico/multicore.h"     // only used by main_4
 #include "pico/util/queue.h"    // only used by main_4
 
-int main_1(void)
+int main(void)
 {
     stdio_init_all();
 
@@ -195,3 +195,28 @@ int main_4(void)
 
     return 0;
 }
+
+
+
+
+//main_1 (Basic Polling)
+//Approach: Runs a straightforward sequential while(1) loop. 
+//It reads the sensor, prints the data, and optionally uses a blocking delay (sleep_ms).
+//Purpose: The simplest baseline implementation to verify basic communication and sensor initialization, 
+//but vulnerable to timing jitter.
+
+//main_2 (Timed / Precise Sampling)
+//Approach: Uses hardware timers or precise timestamp checks (time_us_64()) 
+//rather than arbitrary blocking sleeps to calculate sample rates and maintain consistent timing intervals.
+//Purpose: Focuses on accurate data collection frequencies (Hz) and avoiding drift.
+
+//main_3 (Queues & Buffering)
+//Approach: Introduces concurrency control tools 
+//(such as Pico's thread-safe queues from pico/util/queue.h) to decouple data generation from data processing or transmission.
+//Purpose: Prevents data loss and manages bursts of sensor information when handling slower output tasks like printf.
+
+
+//main_4 (Multicore Processing)
+//Approach: Leverages the RP2040 chip's dual-core hardware architecture using <pico/multicore.h>.  
+//Purpose: Splits the workload—for example, dedicating Core 0 strictly to high-frequency sensor polling and hardware reads, 
+//while Core 1 handles heavy data processing, filtering, or serial transmission concurrently.

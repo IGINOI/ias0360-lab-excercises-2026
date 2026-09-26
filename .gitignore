@@ -7,8 +7,13 @@ Thumbs.db
 # IDE and editor files
 .idea/
 .vscode/
+.vscode-server/
 *.swp
 *.swo
+.cache/
+.copilot/
+.dotnet/
+.local/
 
 # Python cache and build files
 __pycache__/
